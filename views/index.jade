@@ -5,7 +5,15 @@ block content
 		.container-fluid
 			h1 Welcome to My App Test
 			#message(style='display:none;')
-				=msg
-
+				if msg
+					=msg
+				else
+					ul
+						if values
+							each val in values
+								li 
+									a(href="person/#{val.id}") #{val.firstName} #{val.lastName}
+						else
+							li No People
 block body_end
 	script(type='text/javascript' src='/js/index.js')

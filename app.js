@@ -5,8 +5,8 @@ var connect = require('connect');
 
 var errorhandler = require('errorhandler')
 var url = require('url');
-var routes = require('./routes');
-var user = require('./routes/user');
+//var routes = require('./routes');
+var person = require('./routes/person');
 var http = require('http');
 var path = require('path');
 
@@ -25,8 +25,9 @@ if ('development' == app.get('env')) {
 	conn.use(errorhandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', person.list);
+app.get('/person/', person.list);
+app.get('/person/:id', person.get);
 
 app.listen(app.get('port'), function () {
   console.log(`Example app listening on port ${app.get('port')}!`);

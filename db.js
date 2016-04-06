@@ -29,15 +29,39 @@ db.queryCollection = function() {
     return new Promise((resolve, reject) => {
         client.queryDocuments(
             collectionUrl,
-            'SELECT VALUE r.address.state FROM root r WHERE r.lastName = "Andersen"',
+            'SELECT r.lastName, r.firstName, r.id FROM root r',
             { enableCrossPartitionQuery: true }
         ).toArray((err, results) => {
             if (err) reject(err)
             else {
-                for (var queryResult of results) {
-                    console.log(`Query returned ${queryResult}`);
-                }
                 resolve(results);
+            }
+        });
+    });
+};
+
+db.queryCollectionById = function(id) {
+    console.log(`Querying collection through index:\n${config.collection.id}\n`);
+	
+    return new Promise((resolve, reject) => {
+		var query = {
+			query: 'SELECT r.lastName, r.firstName, r.id, r.children, r.parents FROM root r WHERE r.id = @id',
+			parameters: [{
+				name: '@id',
+				value: id
+			}]
+		};
+        client.queryDocuments(
+            collectionUrl,
+			query,
+            { enableCrossPartitionQuery: true }
+        ).toArray((err, results) => {
+            if (err) reject(err)
+            else {
+				if(results.length > 0)
+					resolve(results[0]);
+				else
+					resolve(results);
             }
         });
     });
