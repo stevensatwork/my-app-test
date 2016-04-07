@@ -17,7 +17,7 @@ block content
 							span #{person.lastName}
 						if person.parents
 							h3 Parents
-							table
+							table(class="table")
 								thead
 									tr
 										th Name
@@ -27,7 +27,7 @@ block content
 											td #{parent.firstName}
 						if person.children
 							h3 Children
-							table
+							table(class="table")
 								thead
 									tr
 										th Name

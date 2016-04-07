@@ -17,18 +17,3 @@
 label {
 	padding-right: 5px;
 }
-
-table th {
-	border-bottom: 1px solid gray;
-}
-
-table th,
-table td {
-	min-width: 75px;
-	padding: 0 10px;
-}
-
-table td:first-of-type,
-table th:first-of-type{
-	padding: 0 10px 0 0;
-}
